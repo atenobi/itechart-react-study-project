@@ -1,0 +1,33 @@
+.timer-container {
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+.timer-counter {
+    width: 40%;
+    height: 60px;
+    font-size: 45px;
+    color: red;
+    text-align: center;
+}
+
+.timer-input {
+    width: 35%;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.timer-input>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.timer-button {
+    border-radius: 5px;
+    background-color: #3ebe20;
+    color: white;
+    border: 1px solid white;
+}
