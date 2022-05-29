@@ -1,3 +1,5 @@
+@import './components/timer/timer.css';
+
 .App {
  
   background-color: #282c34;
@@ -10,9 +12,3 @@
   color: white;
 }
 
-.timer-container {
-  width: 35%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}

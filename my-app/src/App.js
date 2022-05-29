@@ -1,6 +1,6 @@
 import "./App.css";
-import Clock from "../src/components/Clock";
-import Timer from "../src/components/Timer";
+import Clock from "./components/clock/Clock";
+import Timer from "./components/timer/Timer";
 
 function App() {
   return (
