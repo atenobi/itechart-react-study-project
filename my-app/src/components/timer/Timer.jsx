@@ -1,26 +1,47 @@
 import React, { useState, useEffect } from "react";
 
 const Timer = () => {
-  let [secLeft, setSecLeft] = useState("");
+  let [secLeft, setSecLeft] = useState("0");
+  let [minLeft, setMinLeft] = useState("0");
+
   const [userSec, setUserSec] = useState("");
+
   const [isGoing, setIsGoing] = useState(false);
 
   const startTimer = () => {
+    setSecLeft(0);
+    setMinLeft(0);
+
     setIsGoing(true);
-    setSecLeft(userSec);
+
+    if (userSec > 60) {
+      setMinLeft(Math.floor(userSec / 60));
+      setSecLeft(userSec - Math.floor(userSec / 60) * 60);
+    }  else {
+      setMinLeft(0);
+      setSecLeft(userSec);
+    }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      isGoing && setSecLeft(secLeft >= 1 ? (secLeft -= 1) : 'Boom!');
+      if (isGoing && secLeft >= 1) {
+        setSecLeft((secLeft -= 1));
+      }
+
+      if (!secLeft && minLeft !== 0) {
+        setMinLeft(minLeft -= 1);
+        setSecLeft(60);
+      }
+
     }, 1000);
     return () => clearInterval(interval);
-  }, [userSec, secLeft]);
+  }, [userSec, secLeft, minLeft]);
 
   return (
     <div className="timer-container">
       <label htmlFor="timer-second" className="timer-counter">
-        {secLeft}
+        {minLeft}:{secLeft}
       </label>
 
       <input
@@ -31,7 +52,9 @@ const Timer = () => {
         id="timer-second"
       />
 
-      <button className="timer-button" onClick={startTimer}>run timer</button>
+      <button className="timer-button" onClick={startTimer}>
+        run timer
+      </button>
     </div>
   );
 };
