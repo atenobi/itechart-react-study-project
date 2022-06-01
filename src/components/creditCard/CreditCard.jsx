@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 // functions
-import { cardNumberVerify, dateVerify, nameVerify } from "../../js_functions/cardVerify";
+import {
+  cardNumberVerify,
+  dateVerify,
+  nameVerify,
+} from "../../js_functions/cardVerify";
 
 const CreditCard = () => {
   // card number
@@ -17,12 +21,12 @@ const CreditCard = () => {
   const [userCardYear, setUserCardYear] = useState("");
 
   // card owner name
-  const [ownerName, setOwnerName] = useState('');
-  const [userOwnerName, setUserOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState("");
+  const [userOwnerName, setUserOwnerName] = useState("");
 
-   // card owner surname
-   const [ownerSurName, setOwnerSurName] = useState('');
-   const [userOwnerSurName, setUserOwnerSurName] = useState('');
+  // card owner surname
+  const [ownerSurName, setOwnerSurName] = useState("");
+  const [userOwnerSurName, setUserOwnerSurName] = useState("");
 
   // user inputs values
   const crdNumInput = (e) => setUserCardNum(e.target.value);
@@ -53,40 +57,40 @@ const CreditCard = () => {
       setCardYear("?");
       // throw new Error("Something wrong with your card date! Check it, please!");
     }
-if (nameVerify(userOwnerName, userOwnerSurName).status) {
-  setOwnerName(userOwnerName.toUpperCase());
-  setOwnerSurName(userOwnerSurName.toUpperCase());
-} else {
-  setOwnerName('?');
-  setOwnerSurName('?');
-  // throw new Error("Something wrong with owner name! Check it, please!");
-}
-   
+    if (nameVerify(userOwnerName, userOwnerSurName).status) {
+      setOwnerName(userOwnerName.toUpperCase());
+      setOwnerSurName(userOwnerSurName.toUpperCase());
+    } else {
+      setOwnerName("?");
+      setOwnerSurName("?");
+      // throw new Error("Something wrong with owner name! Check it, please!");
+    }
   };
 
   useEffect(() => {
     setCardNumber(userCardNum);
-  }, [cardNumber, cardMonth, cardYear]);
+  }, [cardNumber, cardMonth, cardYear, ownerName, ownerSurName]);
 
   return (
     <div>
       <div className="credit-card-container">
-        <h1 className="credit-card_bank-name">Your bank</h1>
+        <h1 className="credit-card_bank-name">enter your card info</h1>
         <input
           type="number"
           className="credit-card_card-number"
-          placeholder="0000   0000   0000   0000"
+          // placeholder="0000   0000   0000   0000"
+          placeholder="card number"
           maxLength={16}
           minLength={13}
           onChange={(e) => crdNumInput(e)}
         />
 
-        <p className="credit-card_static-text">valid</p>
+        <p className="credit-card_little-text">valid until</p>
 
         <input
           type="number"
           className="credit-card_card-valid-month"
-          placeholder="mm"
+          placeholder="month"
           min={1}
           max={12}
           onChange={(e) => cardMonthInput(e)}
@@ -99,7 +103,7 @@ if (nameVerify(userOwnerName, userOwnerSurName).status) {
         <input
           type="number"
           className="credit-card_card-valid-year"
-          placeholder="yy"
+          placeholder="year"
           onChange={(e) => cardYearInput(e)}
         />
 
@@ -107,14 +111,18 @@ if (nameVerify(userOwnerName, userOwnerSurName).status) {
           type="text"
           className="credit-card_card-owner-name"
           placeholder="Name"
-          onChange={(e)=> {cardOwnerNameInput(e)}}
+          onChange={(e) => {
+            cardOwnerNameInput(e);
+          }}
         />
 
         <input
           type="text"
           className="credit-card_card-owner-surname"
           placeholder="Surname"
-          onChange={(e)=> {cardOwnerSurNameInput(e)}}
+          onChange={(e) => {
+            cardOwnerSurNameInput(e);
+          }}
         />
         <h1 className="credit-card_card-type">
           {cardNumberVerify(userCardNum).type}
@@ -123,6 +131,7 @@ if (nameVerify(userOwnerName, userOwnerSurName).status) {
         <p className="credit-card_static-text">{ownerName}</p>
         <p className="credit-card_static-text">{ownerSurName}</p>
       </div>
+
       <button
         type="submit"
         className="credit-card_submit-button"
