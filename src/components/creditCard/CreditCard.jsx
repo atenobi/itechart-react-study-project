@@ -8,6 +8,9 @@ import {
 } from "../../js_functions/cardVerify";
 
 const CreditCard = () => {
+  // info icon
+  const [infoIcon, setInfoicon] = useState("");
+
   // card number
   const [cardNumber, setCardNumber] = useState("");
   const [userCardNum, setUserCardNum] = useState("");
@@ -37,6 +40,7 @@ const CreditCard = () => {
 
   // submit function
   const submitHandler = () => {
+    setInfoicon(null);
     setCardNumber(null);
     setCardMonth(null);
     setCardYear(null);
@@ -46,24 +50,22 @@ const CreditCard = () => {
     // number verifying
     cardNumberVerify(userCardNum).status
       ? setCardNumber(userCardNum)
-      : cardNumberVerify(userCardNum).status;
+      : setInfoicon("Please, check you`r card number!!!");
 
     // date valid verifying
     if (dateVerify(userCardMonth, userCardYear).status) {
       setCardMonth(dateVerify(userCardMonth, userCardYear).monthNumber);
       setCardYear(dateVerify(userCardMonth, userCardYear).yearNumber);
     } else {
-      setCardMonth("?");
-      setCardYear("?");
-      // throw new Error("Something wrong with your card date! Check it, please!");
+      setInfoicon("Please, check you`r card date!!!");
     }
+
+    // name and surname verifying
     if (nameVerify(userOwnerName, userOwnerSurName).status) {
       setOwnerName(userOwnerName.toUpperCase());
       setOwnerSurName(userOwnerSurName.toUpperCase());
     } else {
-      setOwnerName("?");
-      setOwnerSurName("?");
-      // throw new Error("Something wrong with owner name! Check it, please!");
+      setInfoicon("Please, check you`r name syntax!!!");
     }
   };
 
@@ -72,18 +74,23 @@ const CreditCard = () => {
   }, [cardNumber, cardMonth, cardYear, ownerName, ownerSurName]);
 
   return (
-    <div>
+    <div className="flex-column-center width-100">
+      <p className="info-icon">{infoIcon}</p>
       <div className="credit-card-container">
         <h1 className="credit-card_bank-name">enter your card info</h1>
-        <input
-          type="number"
-          className="credit-card_card-number"
-          // placeholder="0000   0000   0000   0000"
-          placeholder="card number"
-          maxLength={16}
-          minLength={13}
-          onChange={(e) => crdNumInput(e)}
-        />
+        <div>
+          <input
+            type="number"
+            className="credit-card_card-number"
+            // placeholder="0000   0000   0000   0000"
+            placeholder="card number"
+            maxLength={16}
+            minLength={13}
+            onChange={(e) => crdNumInput(e)}
+          />
+
+          <p className="credit-card_static-text width-100">{cardNumber}</p>
+        </div>
 
         <p className="credit-card_little-text">valid until</p>
 
@@ -128,8 +135,8 @@ const CreditCard = () => {
           {cardNumberVerify(userCardNum).type}
         </h1>
 
-        <p className="credit-card_static-text">{ownerName}</p>
-        <p className="credit-card_static-text">{ownerSurName}</p>
+        <p className="credit-card_static-text width-50">{ownerName}</p>
+        <p className="credit-card_static-text width-50">{ownerSurName}</p>
       </div>
 
       <button
