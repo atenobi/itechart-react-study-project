@@ -7,28 +7,38 @@ import {
   nameVerify,
 } from "../../js_functions/cardVerify";
 
+// redux imports
+import { useDispatch, useSelector } from "react-redux";
+
+// actions
+import {
+  setCardNum,
+  setCardMonth,
+  setCardYear,
+  setOwnerName,
+  setOwnerSurname,
+} from "../../reducers/actions";
+
 const CreditCard = () => {
+  const dispatch = useDispatch();
+  // selectors
+  const cardNum = useSelector((state) => state.userCard.cardNum);
+  const month = useSelector((state) => state.userCard.cardMonth);
+  const year = useSelector((state) => state.userCard.cardYear);
+  const name = useSelector((state) => state.userCard.ownerName);
+  const surName = useSelector((state) => state.userCard.ownerSurname);
+
   // info icon
-  const [infoIcon, setInfoicon] = useState("");
-
+  const [infoIcon, setInfoIcon] = useState("");
   // card number
-  const [cardNumber, setCardNumber] = useState("");
   const [userCardNum, setUserCardNum] = useState("");
-
   // card month
-  const [cardMonth, setCardMonth] = useState("");
   const [userCardMonth, setUserCardMonth] = useState("");
-
   // card year
-  const [cardYear, setCardYear] = useState("");
   const [userCardYear, setUserCardYear] = useState("");
-
   // card owner name
-  const [ownerName, setOwnerName] = useState("");
   const [userOwnerName, setUserOwnerName] = useState("");
-
   // card owner surname
-  const [ownerSurName, setOwnerSurName] = useState("");
   const [userOwnerSurName, setUserOwnerSurName] = useState("");
 
   // user inputs values
@@ -40,38 +50,40 @@ const CreditCard = () => {
 
   // submit function
   const submitHandler = () => {
-    setInfoicon(null);
-    setCardNumber(null);
-    setCardMonth(null);
-    setCardYear(null);
-    setOwnerName(null);
-    setOwnerSurName(null);
+    setInfoIcon(null);
+
+    // clear cerd info
+    dispatch(setCardNum(""));
+    dispatch(setCardMonth(""));
+    dispatch(setCardYear(""));
+    dispatch(setOwnerName(""));
+    dispatch(setOwnerSurname(""));
 
     // number verifying
     cardNumberVerify(userCardNum).status
-      ? setCardNumber(userCardNum)
-      : setInfoicon("Please, check you`r card number!!!");
+      ? dispatch(setCardNum(userCardNum))
+      : setInfoIcon("Please, check you`r card number!!!");
 
     // date valid verifying
     if (dateVerify(userCardMonth, userCardYear).status) {
-      setCardMonth(dateVerify(userCardMonth, userCardYear).monthNumber);
-      setCardYear(dateVerify(userCardMonth, userCardYear).yearNumber);
+      dispatch(
+        setCardMonth(dateVerify(userCardMonth, userCardYear).monthNumber)
+      );
+      dispatch(setCardYear(dateVerify(userCardMonth, userCardYear).yearNumber));
     } else {
-      setInfoicon("Please, check you`r card date!!!");
+      setInfoIcon("Please, check you`r card date!!!");
     }
 
     // name and surname verifying
     if (nameVerify(userOwnerName, userOwnerSurName).status) {
-      setOwnerName(userOwnerName.toUpperCase());
-      setOwnerSurName(userOwnerSurName.toUpperCase());
+      dispatch(setOwnerName(userOwnerName.toUpperCase()));
+      dispatch(setOwnerSurname(userOwnerSurName.toUpperCase()));
     } else {
-      setInfoicon("Please, check you`r name syntax!!!");
+      setInfoIcon("Please, check you`r name syntax!!!");
     }
   };
 
-  useEffect(() => {
-    setCardNumber(userCardNum);
-  }, [cardNumber, cardMonth, cardYear, ownerName, ownerSurName]);
+  useEffect(() => {}, []);
 
   return (
     <div className="flex-column-center width-100">
@@ -89,7 +101,7 @@ const CreditCard = () => {
             onChange={(e) => crdNumInput(e)}
           />
 
-          <p className="credit-card_static-text width-100">{cardNumber}</p>
+          <p className="credit-card_static-text width-100">{cardNum}</p>
         </div>
 
         <p className="credit-card_little-text">valid until</p>
@@ -104,7 +116,7 @@ const CreditCard = () => {
         />
 
         <p className="credit-card_static-text">
-          {cardMonth}/{cardYear}
+          {month}/{year}
         </p>
 
         <input
@@ -135,8 +147,8 @@ const CreditCard = () => {
           {cardNumberVerify(userCardNum).type}
         </h1>
 
-        <p className="credit-card_static-text width-50">{ownerName}</p>
-        <p className="credit-card_static-text width-50">{ownerSurName}</p>
+        <p className="credit-card_static-text width-50">{name}</p>
+        <p className="credit-card_static-text width-50">{surName}</p>
       </div>
 
       <button
