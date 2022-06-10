@@ -5,7 +5,7 @@ import {
   cardNumberVerify,
   dateVerify,
   nameVerify,
-} from "../../js_functions/cardVerify";
+} from "../../js_functions/cardVerify/cardVerify";
 
 // redux imports
 import { useDispatch, useSelector } from "react-redux";
