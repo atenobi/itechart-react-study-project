@@ -36,7 +36,7 @@ export const dateVerify = (month, year) => {
 
   const dateValues = {
     monthNumber: "",
-    yearNumber: '',
+    yearNumber: "",
     status: false,
   };
 
@@ -44,12 +44,12 @@ export const dateVerify = (month, year) => {
     dateValues.monthNumber = month;
     dateValues.status = true;
   } else {
-    dateValues.monthNumber = " ";
+    dateValues.monthNumber = "";
     dateValues.status = false;
   }
 
   if (year === currentYear && month < currentMonth) {
-    dateValues.monthNumber = " ";
+    dateValues.monthNumber = "";
     dateValues.status = false;
   }
  

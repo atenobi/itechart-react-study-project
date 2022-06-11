@@ -1,5 +1,6 @@
 @import "./components/timer/timer.css";
 @import "./components/creditCard/creditCard.css";
+@import "./components/YouTubeVideoSearch/youTubeVideoSearch.css";
 
 .App {
   background-color: #282c34;

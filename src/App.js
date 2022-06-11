@@ -2,18 +2,24 @@ import React from "react";
 import "./App.css";
 // import Clock from "./components/clock/Clock";
 // import Timer from "./components/timer/Timer";
-import CreditCard from "./components/creditCard/CreditCard";
+// import CreditCard from "./components/creditCard/CreditCard";
+import YouTubeVideoSearch from "./components/YouTubeVideoSearch/YouTubeVideoSearch";
 
 function App() {
   return (
     <div className="App">
+      
       {/* <Clock /> */}
 
       {/* Create a component that represents a simple timer. */}
       {/* <Timer /> */}
 
       {/* {Implement a control to input credit card information.} */}
-      <CreditCard />
+      {/* <CreditCard /> */}
+
+      {/* Create a web page using React and Redux where users can search for YouTube videos (display list results) using Youtube REST API. */}
+      <YouTubeVideoSearch />
+
     </div>
   );
 }
