@@ -17,7 +17,6 @@ const YouTubeVideoSearch = () => {
           return response.json();
         })
         .then((data) => {
-          console.log(data.items);
           setVideousArr(data.items);
         });
     }
