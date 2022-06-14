@@ -8,7 +8,7 @@ import {
 } from "../../js_functions/cardVerify/cardVerify";
 
 // redux imports
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // actions
 import {
@@ -17,16 +17,26 @@ import {
   setCardYear,
   setOwnerName,
   setOwnerSurname,
-} from "../../reducers/actions";
+} from "../../redux/actions";
+
+// selectors
+import {
+  selectCardnum,
+  selectCardMonth,
+  selectCardYear,
+  selectCardOwnerName,
+  selectCardOwnerSurName,
+} from "../../redux/selectors";
 
 const CreditCard = () => {
   const dispatch = useDispatch();
+
   // selectors
-  const cardNum = useSelector((state) => state.userCard.cardNum);
-  const month = useSelector((state) => state.userCard.cardMonth);
-  const year = useSelector((state) => state.userCard.cardYear);
-  const name = useSelector((state) => state.userCard.ownerName);
-  const surName = useSelector((state) => state.userCard.ownerSurname);
+  const cardNum = selectCardnum();
+  const month = selectCardMonth();
+  const year = selectCardYear();
+  const name = selectCardOwnerName();
+  const surName = selectCardOwnerSurName();
 
   // info icon
   const [infoIcon, setInfoIcon] = useState("");
