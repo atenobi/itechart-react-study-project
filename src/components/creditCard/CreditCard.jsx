@@ -32,11 +32,11 @@ const CreditCard = () => {
   const dispatch = useDispatch();
 
   // selectors
-  const cardNum = useSelector(selectCardnum());
-  const month = useSelector(selectCardMonth());
-  const year = useSelector(selectCardYear());
-  const name = useSelector(selectCardOwnerName());
-  const surName = useSelector(selectCardOwnerSurName());
+  const cardNum = useSelector(selectCardnum);
+  const month = useSelector(selectCardMonth);
+  const year = useSelector(selectCardYear);
+  const name = useSelector(selectCardOwnerName);
+  const surName = useSelector(selectCardOwnerSurName);
 
   // info icon
   const [infoIcon, setInfoIcon] = useState("");
