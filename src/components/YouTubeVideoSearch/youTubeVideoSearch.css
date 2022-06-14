@@ -6,7 +6,7 @@
   width: 95%;
   margin-top: 20px;
   display: flex;
-  align-items: start;
+  flex-direction: start;
   justify-content: center;
   flex-direction: column;
 }

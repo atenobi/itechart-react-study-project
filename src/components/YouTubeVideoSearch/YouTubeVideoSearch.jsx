@@ -8,11 +8,12 @@ const YouTubeVideoSearch = () => {
 
   const fetchVideo = () => {
     const urlApi =
-      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&videoDefinition=any&key=AIzaSyDRy70gap8WqiZls97MLWSj2iEBAl88VII";
+      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&videoDefinition=any";
+    const apiKey = "&key=AIzaSyDRy70gap8WqiZls97MLWSj2iEBAl88VII";
     const userSearch = `&q=${userInput}`;
 
     if (userInput.length > 0) {
-      fetch(urlApi + userSearch)
+      fetch(urlApi + apiKey + userSearch)
         .then((response) => {
           return response.json();
         })
@@ -39,8 +40,11 @@ const YouTubeVideoSearch = () => {
         />
 
         <button
-        className="video-search-input--button"
-        onClick={() => fetchVideo()}>search</button>
+          className="video-search-input--button"
+          onClick={() => fetchVideo()}
+        >
+          search
+        </button>
       </div>
       <YoutubeVideoList videous={videousArr} />
     </div>

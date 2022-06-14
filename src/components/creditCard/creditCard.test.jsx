@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { store } from "../../reducers/reducers";
+import { store } from "../../redux/reducers";
 
 import CreditCard from "./CreditCard";
 
